@@ -3,12 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Daniel & Alessandra</title>
+    <meta name="description" content="Venha celebrar essa nova fase conosco!">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Daniel & Alessandra - Chá de Panela">
+    <meta property="og:description" content="Venha celebrar essa nova fase conosco!">
+    <meta property="og:image" content="/images/profile-picture.jpg">
+    <meta property="og:locale" content="pt_BR">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <meta name="robots" content="noindex, nofollow, noarchive">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 </head>
 
 <body>
@@ -40,14 +45,54 @@
         queridas como você!
     </p>
     <img class="decoration-footer" src="images/decoration2.svg" />
-    <button class="pix">
+    <button class="pix" data-value="114.735.816-80">
         <img src="images/pix.svg" />
         <div class="infos">
             <span class="code">Chave PIX: 114.735.816-80</span>
             <span class="name">Thais Pereira de Lima (NuBank)</span>
-            <span class="copy">Clique para copiar</span>
+            <span class="copy-default">Clique para copiar</span>
+            <span class="copy-success">✓ Copiado!</span>
         </div>
     </button>
+    <div id="products">
+        <h2>
+            <img src="images/gift.svg" />
+            Lista de presentes
+            <img src="images/gift.svg" />
+        </h2>
+        <p>
+            Clique no presente que deseja oferecer para reservá-lo em seu nome e evitar duplicidades na lista.
+            <br /><br />
+            <em>Você pode adquirir o presente da forma que preferir.</em><br />
+            <em>(As imagens são meramente ilustrativas)</em>
+        </p>
+        <div class="list">
+            <span>Presentes disponíveis</span>
+            <div>
+                <img class="icon" src="images/products/batedeira.webp" />
+                <div class="infos">
+                    <span class="name">Batedeira</span>
+                    <span class="owner">Disponível</span>
+                </div>
+            </div>
+            <span>Presentes reservados</span>
+            <div>
+                <img class="icon" src="images/products/batedeira.webp" />
+                <div class="infos">
+                    <span class="name">Batedeira</span>
+                    <span class="owner">Reservado por <b>João Vitor Machado</b></span>
+                </div>
+            </div>
+            <div class="another">
+                <div class="icon">+</div>
+                <div class="infos">
+                    <span class="name">Outro</span>
+                    <span class="description">Informe seu presente</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/main.js"></script>
 </body>
 
 </html>

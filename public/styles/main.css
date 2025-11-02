@@ -16,6 +16,7 @@ body {
   flex-direction: column;
   min-height: 100dvh;
   padding: 40px;
+  padding-bottom: 60px;
   overflow: hidden;
   overflow-y: auto;
   position: relative;
@@ -85,7 +86,7 @@ h1 {
   font-family: "Playwrite IN", cursive;
 }
 
-h2 {
+body>h2 {
   font-size: 16px;
   line-height: 18px;
   font-weight: 400;
@@ -93,7 +94,7 @@ h2 {
   font-family: "Playwrite IN", cursive;
 }
 
-p.summary {
+body>p.summary {
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
@@ -110,6 +111,7 @@ button.pix {
   width: 100%;
   gap: 15px;
   cursor: pointer;
+  background-color: white;
   box-shadow: 0 0 10px #a31db12e;
   outline: 3px solid transparent;
   transition: outline 0.3s ease;
@@ -118,6 +120,10 @@ button.pix {
 button.pix:focus,
 button.pix:hover {
   outline-color: #a31db1;
+}
+
+button.pix.copied {
+  outline-color: #4CAF50;
 }
 
 button.pix>img {
@@ -142,11 +148,124 @@ button.pix>.infos>.name {
   line-height: 16px;
 }
 
-button.pix>.infos>.copy {
+button.pix>.infos>.copy-default,
+button.pix>.infos>.copy-success {
   font-size: 15px;
+  line-height: 20px;
   font-weight: 600;
-  color: #a31db1;
   margin-top: 5px;
+}
+
+button.pix>.infos>.copy-default {
+  display: inline;
+  color: #a31db1;
+}
+
+button.pix>.infos>.copy-success {
+  display: none;
+  color: #4CAF50;
+}
+
+button.pix.copied>.infos>.copy-default {
+  display: none;
+}
+
+button.pix.copied>.infos>.copy-success {
+  display: inline;
+}
+
+#products {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 50px;
+}
+
+#products>h2 {
+  text-align: center;
+  font-size: 30px;
+  color: #a31db1;
+  text-shadow:
+    2px 2px 0px rgba(111, 9, 123, 0.2),
+    4px 4px 0px rgba(111, 9, 123, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+
+#products>h2>img {
+  display: inline;
+  width: 30px;
+  height: 30px;
+}
+
+#products>p {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+#products>p>em {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+#products>.list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+#products>.list>div {
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  border: none;
+  padding: 10px 15px;
+  width: 100%;
+  gap: 15px;
+  cursor: pointer;
+  background-color: white;
+  box-shadow: 0 0 10px #a31db12e;
+  outline: 3px solid transparent;
+  transition: outline 0.3s ease;
+}
+
+#products>.list>div:focus,
+#products>.list>div:hover {
+  outline-color: #a31db1;
+}
+
+#products>.list>div>.icon {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  border-radius: 10px;
+  outline: 2px solid rgba(128, 128, 128, 0.2);
+}
+
+#products>.list>div>.infos {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: start;
+}
+
+#products>.list>div>.infos>.name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#products>.list>div.another>.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 41px;
+  line-height: 41px;
+  color: #a31db1;
 }
 
 .decoration-footer {
