@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+IN&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+body {
+  background-color: #F2DFE2;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: 40px;
+  overflow: hidden;
+  overflow-y: auto;
+  position: relative;
+  color: black;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+img {
+  pointer-events: none;
+}
+
+body::before {
+  content: "";
+  display: block;
+  background-color: #F2DFE2;
+  background-image: radial-gradient(circle, #F2DFE2 60% 60%, #a31db1 100%);
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 82%
+  }
+
+  50% {
+    background-position: 100% 19%
+  }
+
+  100% {
+    background-position: 0% 82%
+  }
+}
+
+body::after {
+  content: "";
+  display: block;
+  background-image: url(../images/bg1.jpg);
+  background-size: cover;
+  position: fixed;
+  inset: 0;
+  opacity: 0.6;
+  z-index: -1;
+}
+
+#profile {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #000000;
+  box-shadow: 0 1px 10px #00000047;
+}
+
+.decoration-profile {
+  width: 160px;
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: 600;
+  font-family: "Playwrite IN", cursive;
+}
+
+h2 {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 400;
+  margin-bottom: 25px;
+  font-family: "Playwrite IN", cursive;
+}
+
+p.summary {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  margin: 20px 0;
+}
+
+button.pix {
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 60px;
+  width: 100%;
+  gap: 15px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #a31db12e;
+  outline: 3px solid transparent;
+  transition: outline 0.3s ease;
+}
+
+button.pix:focus,
+button.pix:hover {
+  outline-color: #a31db1;
+}
+
+button.pix>img {
+  width: 45px;
+  height: 45px;
+}
+
+button.pix>.infos {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: start;
+}
+
+button.pix>.infos>.code {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+button.pix>.infos>.name {
+  font-size: 14px;
+  line-height: 16px;
+}
+
+button.pix>.infos>.copy {
+  font-size: 15px;
+  font-weight: 600;
+  color: #a31db1;
+  margin-top: 5px;
+}
+
+.decoration-footer {
+  width: 160px;
+  transform: rotate(-2deg);
+}
+
+body>.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+body>.hearts>div {
+  position: absolute;
+  top: -100%;
+  width: var(--size);
+  height: var(--size);
+  left: var(--left);
+  background-color: #ffffff;
+  opacity: 0.6;
+  animation: heart-animation 15s ease-in infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes heart-animation {
+  from {
+    top: -30px;
+    transform: rotate(-45deg) scale(0.4);
+  }
+
+  to {
+    top: 110vh;
+  }
+}
+
+body>.hearts>div:before {
+  position: absolute;
+  top: -50%;
+  left: 0;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: 100%;
+}
+
+body>.hearts>div:after {
+  position: absolute;
+  top: 0;
+  right: -50%;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: 100%;
+}
+
+body>.hearts>div:nth-child(1) {
+  --size: 24px;
+  --left: 5%;
+  --delay: 0s;
+}
+
+body>.hearts>div:nth-child(2) {
+  --size: 27px;
+  --left: 18%;
+  --delay: 2s;
+}
+
+body>.hearts>div:nth-child(3) {
+  --size: 18px;
+  --left: 30%;
+  --delay: 10.6s;
+}
+
+body>.hearts>div:nth-child(4) {
+  --size: 30px;
+  --left: 43%;
+  --delay: 5.1s;
+}
+
+body>.hearts>div:nth-child(5) {
+  --size: 28px;
+  --left: 56%;
+  --delay: 6.4s;
+}
+
+body>.hearts>div:nth-child(6) {
+  --size: 23px;
+  --left: 64%;
+  --delay: 8.5s;
+}
+
+body>.hearts>div:nth-child(7) {
+  --size: 19px;
+  --left: 73%;
+  --delay: 6.2s;
+}
+
+body>.hearts>div:nth-child(8) {
+  --size: 20px;
+  --left: 81%;
+  --delay: 12s;
+}
+
+body>.hearts>div:nth-child(9) {
+  --size: 16px;
+  --left: 90%;
+  --delay: 7.5s;
+}
+
+body>.hearts>div:nth-child(10) {
+  --size: 26px;
+  --left: 24%;
+  --delay: 8.7s;
+}
