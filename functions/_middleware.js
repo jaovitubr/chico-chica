@@ -1,7 +1,7 @@
 const products = [
-  { id: 1, name: "Ferro", image: "/images/products/ferro.webp" },
-  { id: 2, name: "Tanquinho", image: "/images/products/tanquinho.webp" },
-  { id: 3, name: "Fogão", image: "/images/products/fogao.webp" },
+  { id: 1, name: "Ferro", image: "/images/products/ferro.jpg" },
+  { id: 2, name: "Tanquinho", image: "/images/products/tanquinho.png" },
+  { id: 3, name: "Fogão", image: "/images/products/fogao.jpg" },
   { id: 4, name: "Batedeira", image: "/images/products/batedeira.webp" },
   { id: 5, name: "Panela de pressão", image: "/images/products/panela-pressao.webp" },
   { id: 6, name: "Copos", image: "/images/products/copos.webp" },
@@ -49,7 +49,10 @@ class ProductInjector {
             <img class="icon" src="${product.image}" alt="${product.name}" />
             <div class="infos">
               <span class="name">${product.name}</span>
-              <span class="owner">${isAvailable ? 'Disponível' : `Presenteado por <b>${reservation.reservedBy}</b>`}</span>
+              <span class="owner">
+                <span>${isAvailable ? 'Disponível' : 'Presenteado por'} </span>
+                <b>${reservation?.reservedBy || ""}</b>
+              </span>
             </div>
           </div>
         `;
@@ -63,7 +66,10 @@ class ProductInjector {
             <img class="icon" src="/images/gift-border.svg" />
             <div class="infos">
               <span class="name">${gift.gift}</span>
-              <span class="owner">Presenteado por <b>${gift.reservedBy}</b></span>
+              <span class="owner">
+                <span>Presenteado por </span>
+                <b>${gift.reservedBy}</b>
+              </span>
             </div>
           </div>
         `;

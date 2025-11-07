@@ -29,9 +29,9 @@ export async function onRequestPost(context) {
 
       const newGift = {
         id: `custom-${Date.now()}`,
-        gift: customGift.trim(),
+        gift: customGift.replace(/\W\s/g, "").trim(),
         reservationId,
-        reservedBy: fullName.trim(),
+        reservedBy: fullName.replace(/\W\s/g, "").trim(),
         timestamp: new Date().toISOString()
       };
 
@@ -69,7 +69,7 @@ export async function onRequestPost(context) {
 
     reservations[productId] = {
       reservationId,
-      reservedBy: fullName.trim(),
+      reservedBy: fullName.replace(/\W\s/g, "").trim(),
       timestamp: new Date().toISOString()
     };
 

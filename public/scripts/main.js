@@ -87,6 +87,13 @@ dialogForm.addEventListener("submit", async (event) => {
       localStorage.setItem("reservation-id", reservationId);
       dialogForm.reset();
       dialog.close();
+
+      const prodElem = productsList.querySelector(`[data-product-id="${formData.id}"]`);
+      prodElem.classList.remove("available");
+      prodElem.dataset.reservationId = reservationId;
+      prodElem.querySelector(".owner>span").textContent = "Presenteado por";
+      prodElem.querySelector(".owner>b").textContent = formData.name;
+
     } else if (response.status === 409) {
       alert('Este produto já foi reservado por outra pessoa.');
     } else {
@@ -101,7 +108,7 @@ dialogForm.addEventListener("submit", async (event) => {
   dialogConfirmButton.classList.remove("loading");
 });
 
-function openReservationDialog(productId = null, productName = null, reservationId = "") {
+function openReservationDialog(productId = null, productName = null, reservationId = "", reservedBy = "") {
   dialogForm.reset();
 
   const mainSection = dialogForm.querySelector('main');
@@ -117,6 +124,9 @@ function openReservationDialog(productId = null, productName = null, reservation
     dialogTitle.textContent = 'Reservar presente';
   }
 
+  dialogForm.elements.name.value = reservedBy;
+  dialogForm.elements.name.disabled = !!reservedBy;
+
   customGiftInput.style.display = productId ? "none" : "";
   dialogForm.elements.customGift.hidden = !!productId;
   dialogForm.elements.customGift.required = !productId;
@@ -131,11 +141,15 @@ productAnother.addEventListener("click", () => {
 });
 
 availableProducts.forEach(elem => {
-  const productId = parseInt(elem.dataset.productId);
-  const reservationId = elem.dataset.reservationId;
-  const productName = elem.querySelector('.name').textContent;
-
   elem.addEventListener('click', () => {
-    openReservationDialog(productId, productName, reservationId);
+    const productId = parseInt(elem.dataset.productId);
+    const reservationId = elem.dataset.reservationId;
+    const productName = elem.querySelector('.name').textContent;
+    const reservedBy = elem.querySelector('.owner>b')?.textContent;
+
+    const ownReservationId = localStorage.getItem("reservation-id");
+    if (ownReservationId && reservationId && reservationId !== ownReservationId) return;
+
+    openReservationDialog(productId, productName, reservationId, reservedBy);
   });
 });

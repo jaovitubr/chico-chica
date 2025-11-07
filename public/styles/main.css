@@ -318,6 +318,8 @@ button.pix.copied>.infos>.copy-success {
   object-fit: contain;
   border-radius: 15px;
   outline: 2px solid rgba(128, 128, 128, 0.2);
+  background: white;
+  padding: 4px;
 }
 
 #products>.list>div>.infos {
@@ -486,6 +488,7 @@ body>.hearts>div:nth-child(10) {
 #reservation>form {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 #reservation>form>header {

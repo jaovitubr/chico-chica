@@ -92,11 +92,12 @@
                 <div class="input-label">
                     <span>Seu nome completo</span>
                     <input name="name" type="text" minlength="3" title="Digite seu nome completo" autocomplete="name"
-                        required />
+                        pattern="^([\w\s]+)\s([\w\s]+)$" required />
                 </div>
                 <div class="input-label custom-gift">
                     <span>Nome do presente</span>
-                    <input name="customGift" type="text" minlength="3" title="Digite o nome do presente" required />
+                    <input name="customGift" type="text" minlength="3" title="Digite o nome do presente"
+                        pattern="^([\w\s]+)$" required />
                 </div>
             </main>
             <footer>
