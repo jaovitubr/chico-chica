@@ -376,7 +376,7 @@ body>.hearts>div {
   width: var(--size);
   height: var(--size);
   left: var(--left);
-  background-color: #ffffff;
+  background-color: #c169c4;
   opacity: 0.6;
   animation: heart-animation 15s ease-in infinite;
   animation-delay: var(--delay);
