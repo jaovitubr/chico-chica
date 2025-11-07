@@ -67,31 +67,45 @@
             <em>(As imagens são meramente ilustrativas)</em>
         </p>
         <div class="list">
-            <span>Presentes disponíveis</span>
-            <div>
-                <img class="icon" src="images/products/batedeira.webp" />
-                <div class="infos">
-                    <span class="name">Batedeira</span>
-                    <span class="owner">Disponível</span>
-                </div>
-            </div>
-            <span>Presentes reservados</span>
-            <div>
-                <img class="icon" src="images/products/batedeira.webp" />
-                <div class="infos">
-                    <span class="name">Batedeira</span>
-                    <span class="owner">Reservado por <b>João Vitor Machado</b></span>
-                </div>
-            </div>
             <div class="another">
                 <div class="icon">+</div>
                 <div class="infos">
                     <span class="name">Outro</span>
-                    <span class="description">Informe seu presente</span>
+                    <span class="description">Informe o seu presente</span>
                 </div>
             </div>
         </div>
     </div>
+    <dialog id="reservation">
+        <form method="dialog">
+            <input name="id" hidden />
+            <header>
+                <h4 class="title">Reservar presente</h4>
+                <button class="close" title="Fechar" type="button">
+                    <svg width="23" height="23" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </header>
+            <main>
+                <div class="input-label">
+                    <span>Seu nome completo</span>
+                    <input name="name" type="text" minlength="3" title="Digite seu nome completo" autocomplete="name"
+                        required />
+                </div>
+                <div class="input-label custom-gift">
+                    <span>Nome do presente</span>
+                    <input name="customGift" type="text" minlength="3" title="Digite o nome do presente" required />
+                </div>
+            </main>
+            <footer>
+                <button class="cancel" type="button">Cancelar</button>
+                <button class="delete" type="button">Deixar de presentear</button>
+                <button class="confirm" type="submit" value="confirm">Presentear</button>
+            </footer>
+        </form>
+    </dialog>
     <script src="scripts/main.js"></script>
 </body>
 

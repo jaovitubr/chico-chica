@@ -3,4 +3,10 @@
 	"name": "chico-chica",
 	"compatibility_date": "2025-11-01",
 	"pages_build_output_dir": "./public",
+	"kv_namespaces": [
+		{
+			"binding": "RESERVATIONS",
+			"id": "a0b293a632ea4c259a7b1168d33a7f24",
+		}
+	]
 }
