@@ -33,7 +33,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-height: 100dvh;
+  height: 100dvh;
   padding: 40px 20px;
   padding-bottom: 60px;
   overflow: hidden;
@@ -153,21 +153,21 @@ dialog::backdrop {
 }
 
 h1 {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
   font-family: "Playwrite IN", cursive;
 }
 
 body>h2 {
-  font-size: 16px;
-  line-height: 18px;
+  font-size: 17px;
+  line-height: 19px;
   font-weight: 400;
   margin-bottom: 25px;
   font-family: "Playwrite IN", cursive;
 }
 
 body>p.summary {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   line-height: 22px;
   margin: 20px 0;
@@ -199,8 +199,8 @@ button.pix.copied {
 }
 
 button.pix>img {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
 }
 
 button.pix>.infos {
@@ -211,18 +211,18 @@ button.pix>.infos {
 }
 
 button.pix>.infos>.code {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
 }
 
 button.pix>.infos>.name {
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 15px;
+  line-height: 19px;
 }
 
 button.pix>.infos>.copy-default,
 button.pix>.infos>.copy-success {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 20px;
   font-weight: 600;
   margin-top: 5px;
@@ -275,7 +275,7 @@ button.pix.copied>.infos>.copy-success {
 
 #products>p {
   text-align: center;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   line-height: 22px;
 }
@@ -313,8 +313,8 @@ button.pix.copied>.infos>.copy-success {
 }
 
 #products>.list>div>.icon {
-  width: 65px;
-  height: 65px;
+  width: 70px;
+  height: 70px;
   object-fit: contain;
   border-radius: 15px;
   outline: 2px solid rgba(128, 128, 128, 0.2);
@@ -327,17 +327,17 @@ button.pix.copied>.infos>.copy-success {
   flex-direction: column;
   flex: 1;
   text-align: start;
-  gap: 5px;
+  gap: 8px;
 }
 
 #products>.list>div>.infos>.name {
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 600;
 }
 
 #products>.list>div>.infos>.owner {
-  font-size: 16px;
-  line-height: 16px;
+  font-size: 17px;
+  line-height: 19px;
 }
 
 #products>.list>div.available>.infos>.owner {

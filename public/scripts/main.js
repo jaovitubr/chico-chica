@@ -43,6 +43,8 @@ const dialogAttrObserver = new MutationObserver((mutations) => {
 
       if (isOpen) dialog.removeAttribute("inert");
       else dialog.setAttribute("inert", "");
+
+      document.body.style.overflow = isOpen ? "hidden" : "";
     }
   })
 });
