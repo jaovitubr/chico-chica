@@ -91,7 +91,7 @@ dialogForm.addEventListener("submit", async (event) => {
       const prodElem = productsList.querySelector(`[data-product-id="${formData.id}"]`);
       prodElem.classList.remove("available");
       prodElem.dataset.reservationId = reservationId;
-      prodElem.querySelector(".owner>span").textContent = "Presenteado por";
+      prodElem.querySelector(".owner>span").textContent = "Reservado por";
       prodElem.querySelector(".owner>b").textContent = formData.name;
 
     } else if (response.status === 409) {

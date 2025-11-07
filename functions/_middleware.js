@@ -50,7 +50,7 @@ class ProductInjector {
             <div class="infos">
               <span class="name">${product.name}</span>
               <span class="owner">
-                <span>${isAvailable ? 'Disponível' : 'Presenteado por'} </span>
+                <span>${isAvailable ? 'Disponível' : 'Reservado por'} </span>
                 <b>${reservation?.reservedBy || ""}</b>
               </span>
             </div>
@@ -67,7 +67,7 @@ class ProductInjector {
             <div class="infos">
               <span class="name">${gift.gift}</span>
               <span class="owner">
-                <span>Presenteado por </span>
+                <span>Reservado por </span>
                 <b>${gift.reservedBy}</b>
               </span>
             </div>
