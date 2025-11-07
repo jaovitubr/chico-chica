@@ -135,7 +135,7 @@ dialog[open] {
 }
 
 dialog::backdrop {
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(10px);
   background-color: #46464642;
 }
 
