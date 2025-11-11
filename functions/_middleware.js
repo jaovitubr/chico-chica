@@ -40,9 +40,11 @@ class ProductInjector {
       products.forEach(product => {
         const reservation = this.reservations[product.id];
         const reservationId = reservation?.reservationId;
+        // Retorna apenas os primeiros 8 caracteres do reservationId para segurança
+        const partialReservationId = reservationId ? reservationId.substring(0, 8) : null;
         const isAvailable = !reservation;
         const availableClass = isAvailable ? ' class="available"' : '';
-        const availableReservation = !isAvailable ? ` data-reservation-id="${reservationId}"` : '';
+        const availableReservation = !isAvailable ? ` data-reservation-id="${partialReservationId}"` : '';
 
         const productHTML = `
           <div${availableClass} data-product-id="${product.id}"${availableReservation}>
@@ -61,8 +63,10 @@ class ProductInjector {
       });
 
       this.customGifts.forEach(gift => {
+        // Retorna apenas os primeiros 8 caracteres do reservationId para segurança
+        const partialReservationId = gift.reservationId ? gift.reservationId.substring(0, 8) : null;
         const customGiftHTML = `
-          <div class="custom" data-reservation-id="${gift.reservationId}">
+          <div class="custom" data-reservation-id="${partialReservationId}">
             <img class="icon" src="/images/gift-border.svg" />
             <div class="infos">
               <span class="name">${gift.gift}</span>

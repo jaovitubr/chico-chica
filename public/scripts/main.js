@@ -55,11 +55,55 @@ dialogAttrObserver.observe(dialog, {
 
 dialogDeleteButton.addEventListener("click", async () => {
   const formData = Object.fromEntries(new FormData(dialogForm).entries());
+  const reservationId = localStorage.getItem("reservation-id");
 
-  dialogForm.reset();
-  dialog.close();
+  if (!reservationId) {
+    alert('Erro: ID de reserva não encontrado.');
+    return;
+  }
 
-  // TODO: Implementar remoção de reserva
+  dialog.inert = true;
+  dialogDeleteButton.classList.add("loading");
+
+  try {
+    const response = await fetch('/api/unreserve', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        reservationId,
+        productId: formData.id ? parseInt(formData.id) : null,
+      })
+    });
+
+    if (response.ok) {
+      dialogForm.reset();
+      dialog.close();
+
+      const prodElem = productsList.querySelector(`[data-product-id="${formData.id}"]`);
+
+      if (prodElem) {
+        prodElem.classList.add("available");
+        prodElem.removeAttribute("data-reservation-id");
+        prodElem.querySelector(".owner>span").textContent = "Disponível ";
+        prodElem.querySelector(".owner>b").textContent = "";
+      }
+
+    } else if (response.status === 404) {
+      alert('Reserva não encontrada.');
+    } else if (response.status === 403) {
+      alert('Você não tem permissão para remover esta reserva.');
+    } else {
+      alert('Erro ao remover reserva. Tente novamente.');
+    }
+  } catch (error) {
+    console.error('Erro ao remover reserva:', error);
+    alert('Erro ao remover reserva. Tente novamente.');
+  }
+
+  dialog.inert = false;
+  dialogDeleteButton.classList.remove("loading");
 });
 
 dialogForm.addEventListener("submit", async (event) => {
@@ -92,7 +136,8 @@ dialogForm.addEventListener("submit", async (event) => {
 
       const prodElem = productsList.querySelector(`[data-product-id="${formData.id}"]`);
       prodElem.classList.remove("available");
-      prodElem.dataset.reservationId = reservationId;
+      // Armazena apenas o prefixo (primeiros 8 caracteres) no DOM por segurança
+      prodElem.dataset.reservationId = reservationId.substring(0, 8);
       prodElem.querySelector(".owner>span").textContent = "Reservado por";
       prodElem.querySelector(".owner>b").textContent = formData.name;
 
@@ -132,8 +177,13 @@ function openReservationDialog(productId = null, productName = null, reservation
   customGiftInput.style.display = productId ? "none" : "";
   dialogForm.elements.customGift.hidden = !!productId;
   dialogForm.elements.customGift.required = !productId;
-  deleteButton.hidden = reservationId !== localStorage.getItem("reservation-id");
-  confirmButton.hidden = !deleteButton.hidden;
+
+  // Verifica se o reservationId local começa com o prefixo parcial retornado pelo servidor
+  const ownReservationId = localStorage.getItem("reservation-id");
+  const isOwnReservation = ownReservationId && reservationId && ownReservationId.startsWith(reservationId);
+
+  deleteButton.hidden = !isOwnReservation;
+  confirmButton.hidden = !!reservationId || !deleteButton.hidden;
 
   dialog.showModal();
 }
@@ -150,7 +200,9 @@ availableProducts.forEach(elem => {
     const reservedBy = elem.querySelector('.owner>b')?.textContent;
 
     const ownReservationId = localStorage.getItem("reservation-id");
-    if (ownReservationId && reservationId && reservationId !== ownReservationId) return;
+
+    if (ownReservationId && reservationId && !ownReservationId.startsWith(reservationId)) return;
+    else if (!ownReservationId && reservationId) return;
 
     openReservationDialog(productId, productName, reservationId, reservedBy);
   });

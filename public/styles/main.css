@@ -33,7 +33,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100dvh;
+  /* min-height: 100dvh; */
   padding: 40px 20px;
   padding-bottom: 60px;
   overflow: hidden;
@@ -59,6 +59,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
+  pointer-events: none;
 }
 
 @keyframes rainbow {
@@ -84,6 +85,7 @@ body::after {
   inset: 0;
   opacity: 0.6;
   z-index: -1;
+  pointer-events: none;
 }
 
 @keyframes dialog-show {
