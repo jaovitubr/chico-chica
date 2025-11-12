@@ -195,7 +195,7 @@ function openReservationDialog(productId = null, productName = null, reservation
   customGiftInput.style.display = productId ? "none" : "";
   dialogForm.elements.customGift.value = productName;
   dialogForm.elements.customGift.hidden = !!productId;
-  dialogForm.elements.customGift.disabled = !!productId;
+  dialogForm.elements.customGift.disabled = !!productId || !!reservedBy;
   dialogForm.elements.customGift.required = !productId;
 
   const ownReservationId = localStorage.getItem("reservation-id");
