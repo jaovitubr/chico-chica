@@ -1,7 +1,7 @@
 const pixBtn = document.querySelector("button.pix");
 const productsList = document.querySelector("#products>.list");
 const productAnother = productsList.querySelector(".another");
-const availableProducts = productsList.querySelectorAll('div[data-product-id]');
+const availableProducts = productsList.querySelectorAll('div[data-product-id], div[data-reservation-id]');
 const dialog = document.getElementById("reservation");
 const dialogTitle = dialog?.querySelector("header>h4");
 const dialogForm = dialog?.querySelector("form");
@@ -12,6 +12,7 @@ const dialogCancelButton = dialog?.querySelector("button.close");
 
 let products = [];
 let customGifts = [];
+let currentProductElement = null;
 
 pixBtn.addEventListener("click", async () => {
   const value = pixBtn.getAttribute("data-value");
@@ -81,14 +82,18 @@ dialogDeleteButton.addEventListener("click", async () => {
       dialogForm.reset();
       dialog.close();
 
-      const prodElem = productsList.querySelector(`[data-product-id="${formData.id}"]`);
-
-      if (prodElem) {
-        prodElem.classList.add("available");
-        prodElem.removeAttribute("data-reservation-id");
-        prodElem.querySelector(".owner>span").textContent = "Disponível ";
-        prodElem.querySelector(".owner>b").textContent = "";
+      // Se for um produto customizado, remove o elemento da lista
+      if (currentProductElement && currentProductElement.classList.contains('custom')) {
+        currentProductElement.remove();
+      } else if (currentProductElement) {
+        // Se for um produto da lista (não customizado)
+        currentProductElement.classList.add("available");
+        currentProductElement.removeAttribute("data-reservation-id");
+        currentProductElement.querySelector(".owner>span").textContent = "Disponível ";
+        currentProductElement.querySelector(".owner>b").textContent = "";
       }
+
+      currentProductElement = null;
 
     } else if (response.status === 404) {
       alert('Reserva não encontrada.');
@@ -134,12 +139,22 @@ dialogForm.addEventListener("submit", async (event) => {
       dialogForm.reset();
       dialog.close();
 
-      const prodElem = productsList.querySelector(`[data-product-id="${formData.id}"]`);
-      prodElem.classList.remove("available");
-      // Armazena apenas o prefixo (primeiros 8 caracteres) no DOM por segurança
-      prodElem.dataset.reservationId = reservationId.substring(0, 8);
-      prodElem.querySelector(".owner>span").textContent = "Reservado por";
-      prodElem.querySelector(".owner>b").textContent = formData.name;
+      // Atualiza apenas se for um produto da lista (não customizado)
+      if (formData.id && parseInt(formData.id) > 0) {
+        const prodElem = productsList.querySelector(`[data-product-id="${formData.id}"]`);
+        if (prodElem) {
+          prodElem.classList.remove("available");
+          // Armazena apenas o prefixo (primeiros 8 caracteres) no DOM por segurança
+          prodElem.dataset.reservationId = reservationId.substring(0, 8);
+          prodElem.querySelector(".owner>span").textContent = "Reservado por";
+          prodElem.querySelector(".owner>b").textContent = formData.name;
+        }
+      }
+
+      // Recarrega a página para mostrar presentes customizados
+      if (!formData.id || parseInt(formData.id) === 0) {
+        location.reload();
+      }
 
     } else if (response.status === 409) {
       alert('Este produto já foi reservado por outra pessoa.');
@@ -155,13 +170,16 @@ dialogForm.addEventListener("submit", async (event) => {
   dialogConfirmButton.classList.remove("loading");
 });
 
-function openReservationDialog(productId = null, productName = null, reservationId = "", reservedBy = "") {
+function openReservationDialog(productId = null, productName = null, reservationId = "", reservedBy = "", productElement = null) {
   dialogForm.reset();
 
   const mainSection = dialogForm.querySelector('main');
   const deleteButton = dialogForm.querySelector('button.delete');
   const confirmButton = dialogForm.querySelector('button.confirm');
   const customGiftInput = mainSection.querySelector('.custom-gift');
+
+  // Armazena o elemento do produto para uso posterior
+  currentProductElement = productElement;
 
   if (productId) {
     dialogForm.elements.id.value = productId;
@@ -175,6 +193,7 @@ function openReservationDialog(productId = null, productName = null, reservation
   dialogForm.elements.name.disabled = !!reservedBy;
 
   customGiftInput.style.display = productId ? "none" : "";
+  dialogForm.elements.customGift.value = productName;
   dialogForm.elements.customGift.hidden = !!productId;
   dialogForm.elements.customGift.required = !productId;
 
@@ -204,6 +223,6 @@ availableProducts.forEach(elem => {
     if (ownReservationId && reservationId && !ownReservationId.startsWith(reservationId)) return;
     else if (!ownReservationId && reservationId) return;
 
-    openReservationDialog(productId, productName, reservationId, reservedBy);
+    openReservationDialog(productId, productName, reservationId, reservedBy, elem);
   });
 });
