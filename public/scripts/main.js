@@ -42,8 +42,14 @@ const dialogAttrObserver = new MutationObserver((mutations) => {
       const dialog = mutation.target;
       const isOpen = dialog.hasAttribute("open");
 
-      if (isOpen) dialog.removeAttribute("inert");
-      else dialog.setAttribute("inert", "");
+      if (isOpen) {
+        dialog.removeAttribute("inert");
+
+        const firstInput = dialog.querySelector('input:not([disabled]):not([hidden])');
+        if (firstInput) setTimeout(() => firstInput.focus(), 0);
+      } else {
+        dialog.setAttribute("inert", "");
+      }
 
       document.body.style.overflow = isOpen ? "hidden" : "";
     }
@@ -82,11 +88,9 @@ dialogDeleteButton.addEventListener("click", async () => {
       dialogForm.reset();
       dialog.close();
 
-      // Se for um produto customizado, remove o elemento da lista
       if (currentProductElement && currentProductElement.classList.contains('custom')) {
         currentProductElement.remove();
       } else if (currentProductElement) {
-        // Se for um produto da lista (não customizado)
         currentProductElement.classList.add("available");
         currentProductElement.removeAttribute("data-reservation-id");
         currentProductElement.querySelector(".owner>span").textContent = "Disponível ";
@@ -139,19 +143,16 @@ dialogForm.addEventListener("submit", async (event) => {
       dialogForm.reset();
       dialog.close();
 
-      // Atualiza apenas se for um produto da lista (não customizado)
       if (formData.id && parseInt(formData.id) > 0) {
         const prodElem = productsList.querySelector(`[data-product-id="${formData.id}"]`);
         if (prodElem) {
           prodElem.classList.remove("available");
-          // Armazena apenas o prefixo (primeiros 8 caracteres) no DOM por segurança
           prodElem.dataset.reservationId = reservationId.substring(0, 8);
           prodElem.querySelector(".owner>span").textContent = "Reservado por";
           prodElem.querySelector(".owner>b").textContent = formData.name;
         }
       }
 
-      // Recarrega a página para mostrar presentes customizados
       if (!formData.id || parseInt(formData.id) === 0) {
         location.reload();
       }
@@ -178,7 +179,6 @@ function openReservationDialog(productId = null, productName = null, reservation
   const confirmButton = dialogForm.querySelector('button.confirm');
   const customGiftInput = mainSection.querySelector('.custom-gift');
 
-  // Armazena o elemento do produto para uso posterior
   currentProductElement = productElement;
 
   if (productId) {
@@ -198,7 +198,6 @@ function openReservationDialog(productId = null, productName = null, reservation
   dialogForm.elements.customGift.disabled = !!productId;
   dialogForm.elements.customGift.required = !productId;
 
-  // Verifica se o reservationId local começa com o prefixo parcial retornado pelo servidor
   const ownReservationId = localStorage.getItem("reservation-id");
   const isOwnReservation = ownReservationId && reservationId && ownReservationId.startsWith(reservationId);
 
