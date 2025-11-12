@@ -564,7 +564,6 @@ body>.hearts>div:nth-child(10) {
   gap: 8px;
   color: #2c2c2c;
   flex: 1;
-  overflow: hidden;
   padding: 2px;
   margin: -2px;
 }

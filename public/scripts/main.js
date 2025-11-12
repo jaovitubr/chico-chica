@@ -195,6 +195,7 @@ function openReservationDialog(productId = null, productName = null, reservation
   customGiftInput.style.display = productId ? "none" : "";
   dialogForm.elements.customGift.value = productName;
   dialogForm.elements.customGift.hidden = !!productId;
+  dialogForm.elements.customGift.disabled = !!productId;
   dialogForm.elements.customGift.required = !productId;
 
   // Verifica se o reservationId local começa com o prefixo parcial retornado pelo servidor
