@@ -37,7 +37,23 @@ class ProductInjector {
 
   element(element) {
     if (!this.injected) {
+      // Separa produtos disponíveis e reservados
+      const availableProducts = [];
+      const reservedProducts = [];
+
       products.forEach(product => {
+        const reservation = this.reservations[product.id];
+        const isAvailable = !reservation;
+
+        if (isAvailable) {
+          availableProducts.push(product);
+        } else {
+          reservedProducts.push(product);
+        }
+      });
+
+      // Renderiza primeiro os disponíveis, depois os reservados
+      [...availableProducts, ...reservedProducts].forEach(product => {
         const reservation = this.reservations[product.id];
         const reservationId = reservation?.reservationId;
         // Retorna apenas os primeiros 8 caracteres do reservationId para segurança
