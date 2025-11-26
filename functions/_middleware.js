@@ -25,7 +25,8 @@ const products = [
   { id: 24, name: "Travessas", image: "/images/products/travessas.webp" },
   { id: 25, name: "Colher (conchas)", image: "/images/products/conchas.webp" },
   { id: 26, name: "Escorredor de talher e louças", image: "/images/products/escorredor-talheres.webp" },
-  { id: 27, name: "Panela pipoqueira", image: "/images/products/panela-pipoqueira.webp" }
+  { id: 27, name: "Panela pipoqueira", image: "/images/products/panela-pipoqueira.webp" },
+  { id: 28, name: "Liquidificador", image: "/images/products/liquidificador.webp" },
 ];
 
 class ProductInjector {
